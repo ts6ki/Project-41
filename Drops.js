@@ -9,20 +9,24 @@ class Drops {
       this.y=y;
       this.radius=radius;
       this.image = loadImage("raindrop.png");
-      this.body = Bodies.circle(this.x, this.y,this.radius, options);
-     
+      this.rain = Bodies.circle(this.x, this.y,this.radius, options);
+
   
-      World.add(world, this.body);
+      World.add(world, this.rain);
     }
     display(){
-      var pos =this.body.position;
-    
-      push()
-      translate(pos.x, pos.y);
-      rotate(this.body.angle);
+      var pos =this.rain.position;
+
       imageMode(CENTER);
-      image(this.image, 0, 0, 50, 50);
-      pop()
+      image(this.image, pos.x, pos.y, 20, 20);
+
+      if(pos.x > 900)
+      {
+        World.remove(world, this.rain);
+      }
+
+      //ellipseMode(CENTER);
+      //ellipse(pos.x, pos.y, this.radius, this.radius);
       
     }
   }
